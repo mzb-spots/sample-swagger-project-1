@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Swagger Space History Channel"
+  description: "A sample API that manages list of space rockets"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    name: "Swagger API Team"
+  license:
+    name: "MIT"
+host: "demo.swagger.spacerockets"
+basePath: "/api"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /rockets:
+    get:
+      description: "Returns all space rockets"
+      operationId: "getSpaceRockets"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        description: "index of page to return"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "pageSize"
+        in: "query"
+        description: "size of page to return"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        "200":
+          description: "List of space rockets"
+          schema:
+            $ref: "#/definitions/RocketPageDto"
+definitions:
+  RocketPageDto:
+    type: "object"
+    properties:
+      totalElements:
+        type: "integer"
+        format: "int64"
+      page:
+        type: "integer"
+        format: "int64"
+      pageSize:
+        type: "integer"
+        format: "int64"
+      content:
+        type: array
+        items:
+          $ref: "#/definitions/RocketDto"
+  RocketDto:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: string
+      country:
+        type: string
+      wiki:
+        type: string
+      inauguralLaunchDate:
+        type: "integer"
+        format: "int64"
+
+
